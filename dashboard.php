@@ -4,7 +4,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2 style="color: black;">Admin One-IT Library</h2>   
+                     <h2 style="color: black;">Admin One-IT Library Ikan</h2>   
                     </div>
                 </div>              
                  <!-- /. ROW  -->
