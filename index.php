@@ -17,6 +17,9 @@ include './Database/koneksi.php';
      <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-10 col-md-9">
                 <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+
+                        <!-- Sampul Login -->
                             <div class="col-lg-0">
                                 <div class="p-4">
                                     <div class="text-center">
@@ -41,6 +44,7 @@ include './Database/koneksi.php';
                                     </form>
                                 </div>
                             </div>
+                    </div>
                 </div>
             </div>
         </div>
