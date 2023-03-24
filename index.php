@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,15 +25,6 @@
   <script src="assets/locales/bootstrap-datepicker.id.min.js"></script>
 
 </head>
-
-<?php 
-    if (empty ($_SESSION['username']) AND empty($_SESSION['passuser'])) {
-        echo "<center><br><br><br><br><br><br><br><br><br><br><br><div><img src='images/warning.png' height=180 width=200></div><br>";
-        echo "<center> Untuk mengakses admin One-IT Library <br> <b> anda harus login terlebih dahulu</b>";
-        echo "<meta http-equiv='Refresh' content='4; URL=login.php'>";
-    }else{
-
- ?>
 
 <body>
     <div id="wrapper">
@@ -100,7 +90,6 @@ font-size: 16px;"> Today : <?php $d=date('d-m-Y'); echo "$d"; ?>  &nbsp; <a href
          <!-- /. PAGE WRAPPER  -->
         </div>
      <!-- /. WRAPPER  -->
- <?php } ?>
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
     <script src="assets/js/jquery-1.10.2.js"></script>

@@ -1,14 +1,4 @@
-<?php 
 
-session_start(); 
-error_reporting(0); 
-if (isset($_SESSION["login"])) {
-    header('location: login.php');
-    exit;
-
-}
-
-?>
 <marquee>Selamat Datang di Halaman Utama One-IT Library</marquee>
 <!-- /. NAV SIDE  -->
             <div id="page-inner">
