@@ -1,14 +1,4 @@
-<?php 
 
-session_start(); 
-error_reporting(0); 
-if (isset($_SESSION["login"])) {
-    header('location: login.php');
-    exit;
-
-}
-
-?>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
