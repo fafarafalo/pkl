@@ -1,10 +1,5 @@
 <!-- operasi untuk edit data form -->
 <?php
-// Validasi Login agar file tidak dapat diakses sebelum melakukan Login Terlebih dahulu
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("location:../../index.php");
-}
 
 require_once '../../Database/koneksi.php';
 

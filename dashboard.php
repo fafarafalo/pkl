@@ -11,83 +11,83 @@
                   <hr />
                 <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+            <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-red set-icon">
                     <i class="fa fa-users"></i>
                 </span>
                 <div class="text-box" >
                     <b><?php
-                 
+                  
                 $mahasiswa= mysqli_query($mysqli,"SELECT * FROM tb_anggota");
-                 
+                  
                 $jumlah_mahasiswa = mysqli_num_rows($mahasiswa);
-
+ 
                 ?>
                 <p style="font-size: 20px;"><?php echo $jumlah_mahasiswa; ?> Anggota</p></b>
                 <a href="?page=anggota">
                     <p class="text-muted">Lihat Detail</p></a>
                 </div>
              </div>
-		     </div>
+             </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+            <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-green set-icon">
                     <i class="fa fa-book"></i>
                 </span>
                 <div class="text-box" >
                     <b><?php
-                 
+                  
                 $mahasiswa= mysqli_query($mysqli,"SELECT * FROM tb_buku");
-                 
+                  
                 $jumlah_mahasiswa = mysqli_num_rows($mahasiswa);
-
+ 
                 ?>
                 <p style="font-size: 20px;"><?php echo $jumlah_mahasiswa; ?> Buku</p></b>
                     <a href="?page=buku">
                     <p class="text-muted">Lihat Detail</p></a>
                 </div>
              </div>
-		     </div>
+             </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+            <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-database"></i>
                 </span>
                 <div class="text-box" >
                     <b><?php
-                 
+                  
                 $mahasiswa= mysqli_query($mysqli,"SELECT * FROM tb_transaksi");
-                 
+                  
                 $jumlah_mahasiswa = mysqli_num_rows($mahasiswa);
-
+ 
                 ?>
                 <p style="font-size: 20px;"><?php echo $jumlah_mahasiswa; ?> Transaksi</p></b>
                 <a href="?page=transaksi">
                     <p class="text-muted">Lihat Details</p></a>
                 </div>
              </div>
-		     </div>
+             </div>
                     <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
+            <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-brown set-icon">
                     <i class="fa fa-user"></i>
                 </span>
                 <div class="text-box" >
                     <b><?php
-                 
+                  
                 $mahasiswa= mysqli_query($mysqli,"SELECT * FROM tb_user");
-                 
+                  
                 $jumlah_mahasiswa = mysqli_num_rows($mahasiswa);
-
+ 
                 ?>
                 <p style="font-size: 20px;"><?php echo $jumlah_mahasiswa; ?> User</p></b>
                     <p class="text-muted">Lihat Details</p>
                 </div>
              </div>
-		     </div>
-			</div>
-
-
+             </div>
+            </div>
+ 
+ 
     <div class="row" style="margin-top: 30px;">
                 <div class="col-md-8">
                     <div class="panel panel-default">
@@ -108,14 +108,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                         
                                         <?php
                                             $transaksi = $mysqli->query("SELECT * FROM tb_transaksi WHERE status='pinjam'");
                                             $no = 0;
                                             while( $t = $transaksi->fetch_assoc()){
                                             $no++;
                                          ?>
-
+ 
                                         <tr>
                                             <th scope="row"><?= $no; ?></th>
                                             <td><?= $t["nama"]; ?></td>
@@ -123,15 +123,15 @@
                                             <td><?= $t["tgl_kembali"]; ?></td>
                                             <td>
                                                 <?php
-
+ 
                                                 $denda = 5000;
-
+ 
                                                 $tgl_deadline = $t['tgl_kembali'];
                                                 $tgl_kembali = date('Y-m-d');
-
+ 
                                                 $lambat = terlambat($tgl_deadline,$tgl_kembali);
                                                 $denda1 = $lambat*$denda;
-
+ 
                                                 if ($lambat>0) {
                                                     echo"<font color='red'>$lambat hari<br>(Rp. $denda1)</font>";
                                                 }else{
@@ -167,5 +167,5 @@
                     </div>
                 </div>
             </div>
-
+ 
             <?php include "koneksi.php"; ?>

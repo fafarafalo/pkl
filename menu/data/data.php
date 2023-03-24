@@ -1,10 +1,5 @@
 <?php
-// Validasi Login agar file tidak dapat diakses sebelum melakukan Login Terlebih dahulu
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("location:../../index.php");
-}
-require_once '../../Database/koneksi.php';
+require_once '../../database/koneksi.php';
 
 use database\koneksi;
 
@@ -17,6 +12,9 @@ $koneksi = new koneksi();
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One-IT</title>
+    <link style=stylesheet type=text>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css">
 	<!-- BOOTSTRAP STYLES-->
     <link href="../../assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->
@@ -36,6 +34,62 @@ $koneksi = new koneksi();
   <script src="../../assets/js/bootstrap-datepicker.min.js"></script>
   <script src="../../assets/locales/bootstrap-datepicker.id.min.js"></script>
 
+  <style>
+    thead input {
+        width: 100%;
+    }
+    input[type="text"] {
+  font-size: 16px; 
+  padding: 10px; 
+  border: 2px solid #ccc; 
+  border-radius: 5px; 
+}
+
+input[type="text"]::placeholder {
+  color: #999; 
+  font-style: italic; 
+}
+.text-center.sorting {
+  text-align: center;
+  width: 120px; 
+  
+}
+.text-center1 {
+  text-align: center;
+  width: 120px; /* atur lebar kolom sesuai kebutuhan */
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+table td {
+  padding: 10px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+.table-bordered,
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+
+div.dataTables_wrapper div.dataTables_length select {
+  width: 50px;
+  display: inline-block;
+}
+
+
+    </style>
 </head>
 
 <body>
@@ -88,7 +142,13 @@ font-size: 16px;"> Today : <?php $d=date('d-m-Y'); echo "$d"; ?>  &nbsp; <a href
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
+        <!-- card body -->
+        <div class="card-body">
+
+        <img src="../../assets/img/datar.png" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: 30px;"><br><br>
                         <!-- Tombol Tambah Data -->
 <div class="tambahdata">
 <a href="tambah.php" class="btn btn-primary">Tambah Data</a><br><br>
@@ -116,54 +176,76 @@ font-size: 16px;"> Today : <?php $d=date('d-m-Y'); echo "$d"; ?>  &nbsp; <a href
         <th class="text-center">Action</th>
     </tr>
 </thead>
-<!-- deklarasikan dan panggil koneksi database untuk memanggil data dari tb_dataarsip-->
-<tbody>
-<?php
-
-// untuk menampilkan data yang di tampilkan pada setiap pagenya adalah 10 data menggunakan fungsi sql (DESC LIMIT)
- $query = "SELECT * FROM t_vendor ORDER BY id_vendor";
- $tampil = $koneksi->query($query);
- $no = 1;
-while ($data = mysqli_fetch_array($tampil)) {
-?>
-
-<!-- mendeskripsikan data sesuai pada kolom yang di perlukan -->
-    <tr>
-        <td class="text-center"><?= $no++ ?></td>
-        <td><?= $data['Nama_Perusahaan'] ?></td>
-        <td><?= $data['Alamat_Perusahaan'] ?></td>
-        <td><?= $data['NoFax'] ?></td>
-        <td><?= $data['NoTelp'] ?></td>
-        <td><?= $data['Alamat_Email'] ?></td>
-        <td><?= $data['Direktur'] ?></td>
-        <td><?= $data['NoRekening'] ?></td>
-        <td><?= $data['Bank'] ?></td>
-        <td><?= $data['Kantor_Bank'] ?></td>
-        <td><?= $data['Atas_Nama'] ?></td>
-        <td><?= $data['Ket_Akta_Pendirian'] ?></td>
-        <td><?= $data['NoDPT'] ?></td>
-        <td><?= $data['NoSAPV'] ?></td>
-        <td><?= $data['NoNPWP'] ?></td>
-        <td>
-
-    <!-- buat tombol edit hapus -->
-    <a href="edit.php?id_vendor=<?= $data['id_vendor'] ?>"
-        class="btn btn-warning btn-sm d-sm-inline-block mb-3 mb-sm-1"><i
-            class="fa fa-edit"></i>Edit</a>
-    <a href="hapusdata.php?id_vendor=<?= $data['id_vendor'] ?>"
-        class="btn btn-danger btn-sm d-sm-inline-block mb-3 mb-sm-1"
-        onclick="return confirm('Yakin ingin menghapus data ini?')"><i
-            class="fa fa-trash"></i>Hapus</a>
-
-        </td>
-    </tr>
-<?php } ?>
-</tbody>
+<?php require 'panggil_data.php';?>
 </table>
 </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+
+$(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#dataTable1 thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('#dataTable1 thead');
+ 
+    var table = $('#dataTable1').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+ 
+            // For each column
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+ 
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('change', function (e) {
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+ 
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+                        })
+                        .on('keyup', function (e) {
+                            e.stopPropagation();
+ 
+                            $(this).trigger('change');
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+        },
+    });
+});
+    </script>
 </div>
 </div>
 </div>

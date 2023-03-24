@@ -1,0 +1,109 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+        <!-- card body -->
+        <div class="card-body">
+
+        <img src="../../assets/img/datar.png" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: 30px;"><br><br>
+
+<!-- Tombol Tambah Data -->
+<div class="tambahdata">
+<a href="tambah_data.php" class="btn btn-primary">Tambah Data</a><br><br>
+
+<!-- buat kolom -->
+<div class="table-responsive">
+<table id="dataTable1" class="table table-striped table-bordered" style="width:100%">
+<thead>
+<tr>
+        <th class="text-center">No<br><br></th>
+        <th class="text-center">Nama Perusahaan</th>
+        <th class="text-center">Alamat Perusahaan</th>
+        <th class="text-center">No Fax</th>
+        <th class="text-center">No Telp</th>
+        <th class="text-center">Alamat Email</th>
+        <th class="text-center">Direktur</th>
+        <th class="text-center">No Rekening</th>
+        <th class="text-center">Bank</th>
+        <th class="text-center">Kantor Bank</th>
+        <th class="text-center">Atas Nama</th>
+        <th class="text-center">Ket Akta Pendirian</th>
+        <th class="text-center">No DPT</th>
+        <th class="text-center">No SAPV</th>
+        <th class="text-center">No NPWP</th>
+        <th class="text-center">Action</th>
+    </tr>
+</thead>
+<?php require 'panggil-dataarsip.php';?>
+</table>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+
+$(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#dataTable1 thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('#dataTable1 thead');
+ 
+    var table = $('#dataTable1').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+ 
+            // For each column
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+ 
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('change', function (e) {
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+ 
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+                        })
+                        .on('keyup', function (e) {
+                            e.stopPropagation();
+ 
+                            $(this).trigger('change');
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+        },
+    });
+});
+    </script>
+
+</div>
+</div>
+</div>

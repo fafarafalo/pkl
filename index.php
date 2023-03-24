@@ -1,112 +1,51 @@
-
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+
+<?php
+include 'header.php';
+include './Database/koneksi.php';
+?>
+
 <head>
-      <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>One-IT</title>
-	<!-- BOOTSTRAP STYLES-->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-     <!-- FONTAWESOME STYLES-->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
-        <!-- CUSTOM STYLES-->
-    <link href="assets/css/custom.css" rel="stylesheet" />
-     <!-- GOOGLE FONTS-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-   <!-- TABLE STYLES-->
-    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-
-    <!-- framework bootstrap -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!-- datepicker bootstrap -->
-  <link rel="stylesheet" href="assets/css/bootstrap-datepicker.min.css">
-  <script src="assets/js/bootstrap-datepicker.min.js"></script>
-  <script src="assets/locales/bootstrap-datepicker.id.min.js"></script>
-
+    <title> E-SPK </title>
 </head>
 
-<body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">One It Library</a> 
-            </div>
-  <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;"> Today : <?php $d=date('d-m-Y'); echo "$d"; ?>  &nbsp; <a href="login.php" class="btn btn-danger square-btn-adjust">Logout</a> </div>
-        </nav>   
-           <!-- /. NAV TOP  -->
-                <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-				<li class="text-center">
-                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
-					</li>
-				
-					
-                    <li>
-                        <a  href="?home.php"><i class="fa fa-home fa-2x"></i> Dashboard</a>
-                    </li>
-                    
-                    <li>
-                        <a  href="?page=anggota"><i class="fa fa-users fa-2x"></i> Data</a>
-                    </li>
+<body class="bg-color-warning" style="background-image: url('./assets/img/bg.png'); background-repeat: no-repeat; background-position: full; background-size: cover ; width =">
+    <div class="container" >
 
-                    <li>
-                        <a  href="?page=buku"><i class="fa fa-book fa-2x"></i> Data Vendor</a>
-                    </li>
+     <!-- Card Body -->
+     <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-10 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="col-lg-0">
+                                <div class="p-4">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome</h1>
+                                    </div>
 
-
-
-                </ul>
-               
-            </div>
-            
-        </nav>  
-        <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
-                <div class="row">
-                    <div class="col-md-12">
-                        <?php
-                             include "pages.php";
-                        ?>
-                    </div>
+                                    <!-- form login -->
+                                    <form class="user" action="login.php" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" name="username" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                            </div>
+                                        </div>
+                                             <button class="btn btn-primary btn-user btn-block">Login</button>
+                                    </form>
+                                </div>
+                            </div>
                 </div>
-                 <!-- /. ROW  -->
-                 <hr />
-               
-    </div>
-             <!-- /. PAGE INNER  -->
             </div>
-         <!-- /. PAGE WRAPPER  -->
         </div>
-     <!-- /. WRAPPER  -->
-    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-      <!-- BOOTSTRAP SCRIPTS -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
-     <!-- DATA TABLE SCRIPTS -->
-    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script>
-            $(document).ready(function () {
-                $('#dataTables-example').dataTable();
-            });
-    </script>
-         <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
+    </div>
 </body>
-
 </html>
+
+<?php include 'footer.php';
